@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - PeerPoint</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://kit.fontawesome.com/d2af653d3a.js" crossorigin="anonymous"></script>
+    <style>
+        .faq-item { background: #1a1a1a; margin-bottom: 10px; border-radius: 8px; overflow: hidden; border: 1px solid #333; }
+        .faq-question { padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
+        .faq-answer { padding: 0 15px; max-height: 0; overflow: hidden; transition: all 0.3s ease; color: #aaa; font-size: 0.9rem; }
+        .faq-item.active .faq-answer { padding: 15px; max-height: 200px; border-top: 1px solid #333; }
+        .faq-item.active i { transform: rotate(180deg); color: var(--primary); }
+    </style>
+</head>
+<body>
+    <header style="padding: 15px; background: var(--card-bg); display: flex; align-items: center; gap: 15px;">
+        <a href="profile.html" style="color: white;"><i class="fa-solid fa-arrow-left"></i></a>
+        <h2 style="margin:0; font-size: 1.2rem;">Frequently Asked Questions</h2>
+    </header>
+
+    <main style="padding: 20px; padding-bottom: 100px;">
+        <div class="faq-item">
+            <div class="faq-question">How do I upload a PDF? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-answer">Go to the "Post" tab in the bottom menu. Select your file, choose the category (Lecture Note or Past Question), and hit upload.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Is PeerPoint free? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-answer">Yes! PeerPoint is a student-led initiative designed to make academic resources accessible to everyone for free.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Can I delete my posts? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-answer">Currently, you can delete your profile photo. To remove a resource or forum post, please contact a moderator through the support email.</div>
+        </div>
+    </main>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                q.parentElement.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

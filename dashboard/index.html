@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeerPoint - Feed</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://kit.fontawesome.com/d2af653d3a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="toast-container"></div>
+<header style="padding: 15px; background: var(--card-bg); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #333;">
+    <h2 style="margin:0; font-size: 1.2rem; color: var(--primary);">PeerPoint</h2>
+    
+    <div style="position: relative; cursor: pointer;" onclick="toggleNotifications()">
+        <i class="fa-solid fa-bell" style="font-size: 1.4rem; color: white;"></i>
+        <span id="notif-badge" style="display: none; position: absolute; top: -5px; right: -5px; background: #ff4444; color: white; font-size: 0.6rem; padding: 2px 5px; border-radius: 50%; border: 2px solid var(--card-bg);">0</span>
+    </div>
+
+    <div id="notif-panel" style="display: none; position: fixed; top: 60px; right: 10px; width: 280px; max-height: 400px; background: #1a1a1a; border: 1px solid #333; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 1001; overflow-y: auto;">
+        <div style="padding: 15px; border-bottom: 1px solid #333; display: flex; justify-content: space-between;">
+            <span style="font-weight: bold; font-size: 0.9rem;">Notifications</span>
+            <button onclick="markAllRead()" style="background:none; border:none; color:var(--primary); font-size: 0.7rem; cursor:pointer;">Mark all read</button>
+        </div>
+        <div id="notif-list">
+            <p style="padding: 20px; text-align: center; color: gray; font-size: 0.8rem;">No new notifications</p>
+        </div>
+    </div>
+</header>
+    <section style="background: var(--card-bg); padding: 15px 0 15px 15px; border-bottom: 1px solid #333;">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding-right: 15px; margin-bottom: 10px;">
+        <span style="font-size: 0.85rem; font-weight: bold; color: var(--primary); text-transform: uppercase; letter-spacing: 1px;">Active Students</span>
+        <a href="directory.html" style="font-size: 0.75rem; color: #888; text-decoration: none;">View All <i class="fas fa-arrow-right"></i></a>
+    </div>
+    
+    <div id="active-students-list" style="display: flex; gap: 15px; overflow-x: auto; white-space: nowrap; scrollbar-width: none;">
+        <div class="skeleton" style="width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0;"></div>
+        <div class="skeleton" style="width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0;"></div>
+        <div class="skeleton" style="width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0;"></div>
+    </div>
+</section>
+
+    <main id="feed-container" style="padding: 15px; padding-bottom: 100px;">
+        <div class="skeleton" style="height: 150px; margin-bottom: 15px;"></div>
+        <div class="skeleton" style="height: 150px; margin-bottom: 15px;"></div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>Feed</span>
+        </a>
+        <a href="resources.html" class="nav-item">
+            <i class="fa-solid fa-book"></i>
+            <span>Library</span>
+        </a>
+        <a href="upload.html" class="nav-item">
+            <i class="fa-solid fa-circle-plus"></i>
+            <span>Post</span>
+        </a>
+        <a href="../forum/index.html" class="nav-item">
+            <i class="fa-solid fa-comments"></i>
+            <span>Forum</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/feed.js"></script>
+</body>
+</html>

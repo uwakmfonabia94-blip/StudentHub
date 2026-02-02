@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload - PeerPoint</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://kit.fontawesome.com/d2af653d3a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="toast-container"></div>
+
+    <main style="padding: 15px;">
+        <div class="auth-container" style="margin-top: 20px; margin-bottom: 120px; max-width: 100%;">
+            <h2 style="text-align: left; margin-bottom: 20px; color: var(--primary);">Share Resource</h2>
+            <form id="upload-form">
+                <div class="input-group">
+                    <label>Title</label>
+                    <input type="text" id="title" placeholder="e.g. MTH201 Past Questions" required>
+                </div>
+                
+                <div class="input-group">
+                    <label>Category</label>
+                    <select id="is_past_question" style="width: 100%; padding: 12px; border-radius: 8px; background: #222; color: white; border: 1px solid #444;">
+                        <option value="false">Lecture Note / PDF</option>
+                        <option value="true">Past Question (Photo/PDF)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Department</label>
+                    <input type="text" id="dept" placeholder="e.g. Computer Science" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Level</label>
+                    <select id="level" style="width: 100%; padding: 12px; border-radius: 8px; background: #222; color: white; border: 1px solid #444;">
+                        <option value="100L">100L</option>
+                        <option value="200L">200L</option>
+                        <option value="300L">300L</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Select File (PDF or Image)</label>
+                    <input type="file" id="file-input" accept=".pdf,image/*" required style="padding: 10px; background: #1a1a1a; border: 1px dashed var(--primary); width: 100%; border-radius: 8px; color: #aaa;">
+                </div>
+
+                <button type="submit" class="btn-primary" id="upload-btn" style="margin-top: 10px;">
+                    <span>Upload Resource</span>
+                    <div class="spinner" id="upload-spinner" style="display: none; border-top-color: black;"></div>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Feed</span>
+        </a>
+        <a href="resources.html" class="nav-item">
+            <i class="fa-solid fa-book"></i>
+            <span>Library</span>
+        </a>
+        <a href="upload.html" class="nav-item active">
+            <i class="fa-solid fa-circle-plus"></i>
+            <span>Post</span>
+        </a>
+        <a href="../forum/index.html" class="nav-item">
+            <i class="fa-solid fa-comments"></i>
+            <span>Forum</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/upload.js"></script>
+</body>
+</html>

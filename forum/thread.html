@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion - PeerPoint</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://kit.fontawesome.com/d2af653d3a.js" crossorigin="anonymous"></script>
+     <div id="toast-container"></div>
+</head>
+<body>
+    <div id="toast-container"></div>
+
+    <header style="padding: 15px; background: var(--card-bg); display: flex; align-items: center; gap: 15px;">
+        <a href="index.html" style="color: var(--primary); font-size: 1.2rem;"><i class="fa-solid fa-arrow-left"></i></a>
+        <h2 style="margin:0; font-size: 1.1rem;">Discussion</h2>
+    </header>
+
+    <main style="padding: 15px; padding-bottom: 120px;">
+        <div id="question-detail">
+            <div class="skeleton" style="height: 150px;"></div>
+        </div>
+
+        <h3 style="margin: 20px 0 10px 0; font-size: 1rem; color: var(--text-gray);">Answers</h3>
+        
+        <div id="answers-container">
+            <div class="skeleton" style="height: 80px; margin-bottom: 10px;"></div>
+        </div>
+    </main>
+
+    <div style="position: fixed; bottom: 0; left: 0; width: 100%; background: #111; padding: 15px; border-top: 1px solid #333;">
+        <form id="answer-form" style="display: flex; gap: 10px;">
+            <input type="text" id="answer-input" placeholder="Write an answer..." required style="flex: 1;">
+            <button type="submit" class="btn-primary" style="width: auto; padding: 0 20px;">
+                <i class="fa-solid fa-paper-plane"></i>
+                <div class="spinner" id="answer-spinner"></div>
+            </button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase.js"></script>
+    <script src="../assets/js/utils.js"></script>
+<script src="../assets/js/thread.js"></script>
+</body>
+</html>

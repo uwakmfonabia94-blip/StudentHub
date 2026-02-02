@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library - PeerPoint</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://kit.fontawesome.com/d2af653d3a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="toast-container"></div>
+
+    <header style="padding: 15px; background: var(--card-bg); position: sticky; top: 0; z-index: 100;">
+        <h2 style="text-align: left; font-size: 1.5rem; color: var(--primary);">Resource Library</h2>
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <select id="filter-level" style="flex: 1; padding: 10px; border-radius: 8px; background: #222; color: white; border: 1px solid #444;">
+                <option value="">All Levels</option>
+                <option value="100L">100L</option>
+                <option value="200L">200L</option>
+                <option value="300L">300L</option>
+            </select>
+            <div style="flex: 2; position: relative;">
+                <input type="text" id="search-dept" placeholder="Search Dept..." style="width: 100%; padding: 10px 10px 10px 35px; border-radius: 8px; background: #222; color: white; border: 1px solid #444;">
+                <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; top: 13px; color: gray; font-size: 0.9rem;"></i>
+            </div>
+        </div>
+    </header>
+
+    <main id="resource-list" style="padding: 15px; padding-bottom: 120px;">
+        <div class="skeleton" style="height: 100px; margin-bottom: 10px;"></div>
+        <div class="skeleton" style="height: 100px; margin-bottom: 10px;"></div>
+        <div class="skeleton" style="height: 100px; margin-bottom: 10px;"></div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Feed</span>
+        </a>
+        <a href="resources.html" class="nav-item active">
+            <i class="fa-solid fa-book"></i>
+            <span>Library</span>
+        </a>
+        <a href="upload.html" class="nav-item">
+            <i class="fa-solid fa-circle-plus"></i>
+            <span>Post</span>
+        </a>
+        <a href="../forum/index.html" class="nav-item">
+            <i class="fa-solid fa-comments"></i>
+            <span>Forum</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/resources.js"></script>
+</body>
+</html>

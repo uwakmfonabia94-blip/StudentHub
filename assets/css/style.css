@@ -1,0 +1,218 @@
+:root {
+    --primary: #FF8C00; /* Dark Orange */
+    --bg-black: #0B0B0B;
+    --card-bg: #1A1A1A;
+    --text-white: #FFFFFF;
+    --text-gray: #A0A0A0;
+    --border-color: #333;
+}
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    font-family: 'Inter', sans-serif; 
+}
+
+body {
+    background-color: var(--bg-black);
+    color: var(--text-white);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Auth Container - Forced Square */
+.auth-container {
+    max-width: 450px;
+    width: 90%;
+    margin: 40px auto;
+    padding: 2.5rem;
+    background: var(--card-bg);
+    border-radius: 0; /* Square shape */
+    border: 1px solid var(--border-color);
+    box-shadow: 10px 10px 0px var(--primary); /* Stylish block shadow */
+    animation: fadeIn 0.5s ease-out;
+}
+
+h2 { 
+    color: var(--primary); 
+    margin-bottom: 0.5rem; 
+    text-align: center; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.input-group {
+    margin-bottom: 1.2rem;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.85rem;
+    color: var(--text-gray);
+}
+
+/* Square Inputs & Selects */
+input, select {
+    width: 100%;
+    padding: 14px;
+    background: #222;
+    border: 1px solid var(--border-color);
+    color: white;
+    border-radius: 0; /* Square shape */
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input:focus { 
+    border-color: var(--primary); 
+}
+
+/* Password Toggle Icon */
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    bottom: 14px; /* Adjusted for label height */
+    cursor: pointer;
+    color: var(--text-gray);
+}
+
+/* Square Primary Button */
+.btn-primary {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary);
+    border: none;
+    color: #000;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 0; /* Square shape */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s, transform 0.1s;
+}
+
+.btn-primary:hover {
+    background: #e67e00;
+}
+
+.btn-primary:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Loading Spinner */
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-top: 2px solid #000;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    display: none;
+    margin-left: 10px;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    margin-top: auto;
+    padding: 2rem 1rem;
+    background: #000;
+    border-top: 1px solid var(--border-color);
+}
+
+footer a { 
+    color: var(--text-gray); 
+    text-decoration: none; 
+    margin: 0 10px; 
+    font-size: 0.8rem;
+    transition: color 0.3s;
+}
+
+footer a:hover { color: var(--primary); }
+
+/* Animations */
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+@keyframes spin { 
+    0% { transform: rotate(0deg); } 
+    100% { transform: rotate(360deg); } 
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+    .auth-container {
+        margin: 20px auto;
+        padding: 1.5rem;
+    }
+}
+
+/* Skeleton Animation */
+.skeleton {
+    background: #252525;
+    background: linear-gradient(110deg, #252525 8%, #333 18%, #252525 33%);
+    border-radius: 8px;
+    background-size: 200% 100%;
+    animation: 1.5s shine linear infinite;
+}
+
+@keyframes shine {
+    to { background-position-x: -200%; }
+}
+
+/* Toast Notifications */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.toast {
+    background: var(--primary);
+    color: black;
+    padding: 12px 24px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Bottom Nav */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #111;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+    border-top: 1px solid #333;
+    z-index: 1000;
+}
+
+.nav-item {
+    color: var(--text-gray);
+    text-decoration: none;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-item.active { color: var(--primary); }
+.nav-item span { font-size: 0.7rem; margin-top: 4px; }
+
+@keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }

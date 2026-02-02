@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - PeerPoint</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://kit.fontawesome.com/d2af653d3a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="toast-container"></div>
+
+    <main style="padding: 20px; padding-bottom: 120px;">
+        <div class="auth-container" style="max-width: 100%; text-align: center;">
+            <div id="avatar-container" style="position: relative; display: inline-block; margin-bottom: 20px;">
+                <div id="profile-img-wrapper">
+                    <i class="fas fa-user-circle" id="default-avatar" style="font-size: 100px; color: var(--primary);"></i>
+                    <img id="user-avatar" src="" style="display:none; width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary);">
+                </div>
+                
+                <label for="avatar-input" style="position: absolute; bottom: 0; right: 0; background: var(--primary); color: black; padding: 8px; border-radius: 50%; cursor: pointer; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+                    <i class="fas fa-camera"></i>
+                </label>
+                <input type="file" id="avatar-input" accept="image/*" style="display: none;">
+            </div>
+
+            <button id="delete-photo-btn" style="display:none; background: none; border: none; color: #ff4444; font-size: 0.8rem; margin-bottom: 20px; cursor: pointer; display: block; width: 100%;">Delete Photo</button>
+
+            <form id="profile-form">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="display-name" placeholder="Enter your name" required>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                    <div style="flex: 1; text-align: left;">
+                        <label style="font-size: 0.8rem; color: gray;">Department</label>
+                        <p id="user-dept" style="color: white; font-weight: bold; margin-top: 5px; background: #222; padding: 10px; border-radius: 6px;"></p>
+                    </div>
+                    <div style="flex: 1; text-align: left;">
+                        <label style="font-size: 0.8rem; color: gray;">Level</label>
+                        <p id="user-level" style="color: white; font-weight: bold; margin-top: 5px; background: #222; padding: 10px; border-radius: 6px;"></p>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" id="save-btn">
+                    Update Profile <div class="spinner" id="profile-spinner"></div>
+                </button>
+            </form>
+
+            <button onclick="handleLogout()" style="margin-top: 30px; background: none; border: 1px solid #444; color: #aaa; width: 100%; padding: 12px; border-radius: 8px; cursor: pointer;">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Feed</span>
+        </a>
+        <a href="resources.html" class="nav-item">
+            <i class="fa-solid fa-book"></i>
+            <span>Library</span>
+        </a>
+        <a href="upload.html" class="nav-item">
+            <i class="fa-solid fa-circle-plus"></i>
+            <span>Post</span>
+        </a>
+        <a href="../forum/index.html" class="nav-item">
+            <i class="fa-solid fa-comments"></i>
+            <span>Forum</span>
+        </a>
+        <a href="profile.html" class="nav-item active">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/profile.js"></script>
+</body>
+</html>

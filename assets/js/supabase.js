@@ -1,0 +1,2 @@
+const { createClient } = supabase;
+const _supabase = createClient('https://ulcopolttlmgepmfazwi.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVsY29wb2x0dGxtZ2VwbWZhendpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3OTg4NzQsImV4cCI6MjA4NTM3NDg3NH0.2-UVBo56c2Hh6Z9nmwu2a2UaB7FpNoasicn939LqJiU');

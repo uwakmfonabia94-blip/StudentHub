@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Directory - PeerPoint</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://kit.fontawesome.com/d2af653d3a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="toast-container"></div>
+
+    <header style="padding: 15px; background: var(--card-bg); display: flex; align-items: center; gap: 15px;">
+        <a href="index.html" style="color: white;"><i class="fa-solid fa-arrow-left"></i></a>
+        <h2 style="margin:0; font-size: 1.2rem;">All Students</h2>
+    </header>
+
+    <main id="student-grid" style="padding: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding-bottom: 100px;">
+        <p>Loading classmates...</p>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>Feed</span></a>
+        <a href="resources.html" class="nav-item"><i class="fa-solid fa-book"></i><span>Library</span></a>
+        <a href="upload.html" class="nav-item"><i class="fa-solid fa-circle-plus"></i><span>Post</span></a>
+        <a href="../forum/index.html" class="nav-item"><i class="fa-solid fa-comments"></i><span>Forum</span></a>
+        <a href="profile.html" class="nav-item"><i class="fa-solid fa-user"></i><span>Profile</span></a>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/supabase.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/directory.js"></script>
+</body>
+</html>

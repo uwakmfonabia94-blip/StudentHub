@@ -154,3 +154,37 @@ async function markAllRead() {
 
 // Run on page load
 initNotifications();
+
+/**
+ * PRO TIP: This function pre-loads images in the background 
+ * so they appear instantly when the UI needs them.
+ */
+async function preloadProfileImages(urls) {
+    const promises = urls.map(url => {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = url;
+            img.onload = resolve;
+            img.onerror = resolve; // Continue even if one fails
+        });
+    });
+    await Promise.all(promises);
+}
+
+// Example usage when fetching your "Active Students" list
+async function loadActiveStudents() {
+    // 1. Fetch your students from Supabase
+    const { data: students, error } = await supabase
+        .from('profiles')
+        .select('avatar_url')
+        .limit(10);
+
+    if (students) {
+        // 2. Start pre-loading their photos immediately
+        const urls = students.map(s => s.avatar_url).filter(url => url);
+        preloadProfileImages(urls);
+        
+        // 3. Render your UI (they will pop in much faster now)
+        renderActiveStudents(students);
+    }
+}

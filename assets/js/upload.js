@@ -1,26 +1,3 @@
-/**
- * PeerPoint Upload Logic
- * Handles file uploads to Supabase Storage and metadata to Database.
- */
-
-const uploadForm = document.getElementById('upload-form');
-const btn = document.getElementById('upload-btn');
-const spinner = document.getElementById('upload-spinner');
-
-// Helper: Show Toast Notification
-function showToast(message, type = "success") {
-    const container = document.getElementById('toast-container');
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    if (type === "error") toast.style.borderLeft = "5px solid #ff4444";
-    toast.innerText = message;
-    container.appendChild(toast);
-    setTimeout(() => {
-        toast.style.opacity = '0';
-        setTimeout(() => toast.remove(), 500);
-    }, 3000);
-}
-
 if (uploadForm) {
     uploadForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -32,65 +9,55 @@ if (uploadForm) {
         const dept = document.getElementById('dept').value;
         const level = document.getElementById('level').value;
 
-        if (!file) {
-            showToast("Please select a file first", "error");
-            return;
-        }
+        if (!file) return showToast("Please select a file first", "error");
 
-        // 1. UI Loading State
+        // UI Loading
         btn.disabled = true;
         spinner.style.display = 'block';
 
         try {
-            // 2. Get Current User
-            const { data: { user }, error: authError } = await _supabase.auth.getUser();
-            if (authError || !user) throw new Error("Please log in to upload.");
+            const { data: { user } } = await _supabase.auth.getUser();
+            if (!user) throw new Error("Please log in.");
 
-            // 3. Upload File to Storage Bucket ('pdfs')
-            // Using a timestamp + name to prevent filename collisions
+            // 1. Detect File Type
+            const fileType = file.type.startsWith('image/') ? 'image' : 'pdf';
             const fileExt = file.name.split('.').pop();
-            const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
-            const filePath = `${user.id}/${fileName}`; // Organized by User ID folder
+            const fileName = `${Date.now()}.${fileExt}`;
+            const filePath = `${user.id}/${fileName}`;
 
-            const { data: uploadData, error: uploadError } = await _supabase.storage
+            // 2. Upload to Storage
+            const { error: uploadError } = await _supabase.storage
                 .from('pdfs')
                 .upload(filePath, file);
 
             if (uploadError) throw uploadError;
 
-            // 4. Get the Public URL of the uploaded file
-            const { data: urlData } = _supabase.storage
-                .from('pdfs')
-                .getPublicUrl(filePath);
+            const { data: urlData } = _supabase.storage.from('pdfs').getPublicUrl(filePath);
 
-            const fileUrl = urlData.publicUrl;
-
-            // 5. Save Metadata to 'documents' table
-            const { error: dbError } = await _supabase
+            // 3. Save Metadata (Including file_type)
+            const { data: docData, error: dbError } = await _supabase
                 .from('documents')
                 .insert([{
                     title: title,
-                    file_url: fileUrl,
+                    file_url: urlData.publicUrl,
                     uploaded_by: user.id,
                     department: dept,
                     level: level,
-                    is_past_question: isPastQuestion
-                }]);
+                    is_past_question: isPastQuestion,
+                    file_type: fileType // <--- Added this
+                }]).select().single();
 
             if (dbError) throw dbError;
 
-            // 6. Success!
-            showToast("Resource shared successfully!");
+            // 4. TRIGGER NOTIFICATIONS for Coursemates
+            await sendDepartmentNotification(dept, level, title, user.id, docData.id);
+
+            showToast("Resource shared with your department!");
             uploadForm.reset();
-            
-            // Redirect to feed after a short delay
-            setTimeout(() => {
-                window.location.href = "index.html";
-            }, 1500);
+            setTimeout(() => window.location.href = "index.html", 1500);
 
         } catch (err) {
             showToast(err.message, "error");
-            console.error("Upload Error:", err);
         } finally {
             btn.disabled = false;
             spinner.style.display = 'none';
@@ -98,12 +65,28 @@ if (uploadForm) {
     });
 }
 
-// Optional: Preview for Image Uploads
-document.getElementById('file-input').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (file && file.type.startsWith('image/')) {
-        showToast("Image selected for past question.");
-    } else if (file && file.type === 'application/pdf') {
-        showToast("PDF document selected.");
+/**
+ * LOGIC: Find all students in same dept/level and add a notification for them
+ */
+async function sendDepartmentNotification(dept, level, title, senderId, docId) {
+    // 1. Find all users in this department and level (except the sender)
+    const { data: coursemates } = await _supabase
+        .from('profiles')
+        .select('id')
+        .eq('department', dept)
+        .eq('level', level)
+        .neq('id', senderId);
+
+    if (coursemates && coursemates.length > 0) {
+        const notifications = coursemates.map(mate => ({
+            user_id: mate.id,
+            type: 'new_resource',
+            message: `New ${level} ${dept} resource: ${title}`,
+            related_id: docId,
+            is_read: false
+        }));
+
+        // 2. Insert into notifications table
+        await _supabase.from('notifications').insert(notifications);
     }
-});
+}

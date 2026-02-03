@@ -145,3 +145,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // Refresh the status every 60 seconds
     setInterval(loadActiveStudents, 60000);
 });
+
+
+function renderDocument(doc) {
+    // If it's an image, show a preview. If it's a PDF, show a document icon.
+    const previewHtml = doc.file_type === 'image' 
+        ? `<img src="${doc.file_url}" class="feed-img" onclick="window.open('${doc.file_url}')">`
+        : `<div class="pdf-placeholder" onclick="window.open('${doc.file_url}')">
+             <i class="fa-solid fa-file-pdf"></i>
+             <span>View PDF Document</span>
+           </div>`;
+
+    return `
+        <div class="feed-card">
+            <h3>${doc.title}</h3>
+            ${previewHtml}
+            <div class="feed-footer">
+                <span>${doc.department} - ${doc.level}</span>
+            </div>
+        </div>
+    `;
+}
+
+async function handleNotificationClick(notif) {
+    // 1. Mark as read in Database
+    await _supabase
+        .from('notifications')
+        .update({ is_read: true })
+        .eq('id', notif.id);
+
+    // 2. Redirect to the specific resource
+    // If it's a new_resource, we show that document
+    if (notif.type === 'new_resource') {
+        window.location.href = `index.html?view_doc=${notif.related_id}`;
+    }
+}

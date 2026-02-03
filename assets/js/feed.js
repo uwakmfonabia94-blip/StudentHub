@@ -84,7 +84,7 @@ async function fetchGeneralFeed() {
 async function checkUser() {
     const { data } = await _supabase.auth.getSession();
     if (!data.session) {
-        window.location.href = "../auth/login.html";
+        window.location.href = "login.html";
     } else {
         fetchGeneralFeed();
     }

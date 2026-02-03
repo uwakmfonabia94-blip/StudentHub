@@ -6,7 +6,7 @@ const profileForm = document.getElementById('profile-form');
 
 async function loadProfile() {
     const { data: { user } } = await _supabase.auth.getUser();
-    if (!user) return window.location.href = "../auth/login.html";
+    if (!user) return window.location.href = "login.html";
 
     const { data: profile, error } = await _supabase
         .from('profiles')
@@ -91,7 +91,7 @@ profileForm.addEventListener('submit', async (e) => {
 
 async function handleLogout() {
     await _supabase.auth.signOut();
-    window.location.href = "../auth/login.html";
+    window.location.href = "login.html";
 }
 
 loadProfile();
